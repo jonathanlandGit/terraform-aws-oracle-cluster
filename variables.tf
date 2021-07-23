@@ -86,6 +86,13 @@ variable "vrds_copy_tags_to_snapshot_ro" { default = true }
 
 variable "instance_count" {}
 
+variable "rds_instances_added" {}
+
+# variable "user" {
+#   description = "IAM usernames"
+#   type        = set(string)
+# }
+
 # PgSQL Parameter Group Arguments
 variable "param_max_connections" { default = "LEAST({DBInstanceClassMemory/9531392},5000)" }
 variable "param_ro_max_connections" { default = "LEAST({DBInstanceClassMemory/9531392},5000)" }

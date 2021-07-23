@@ -5,6 +5,7 @@ resource "aws_db_subnet_group" "main" {
   subnet_ids  = var.subnets
 }
 
+
 # data "aws_availability_zones" "all" {}
 # resource "aws_autoscaling_group" "example" {
 #   # launch_configuration = aws_launch_configuration.example.id
@@ -23,13 +24,24 @@ resource "aws_db_subnet_group" "main" {
 #     }
 #   }
 # }
+
+locals {
+  rds_instances = toset([
+    "rds-orc1",
+    "rds-orc2",
+    # "rds-orc3",
+  ])
+}
+
 resource "aws_db_instance" "default" {
-  count                     = var.instance_count
+  # count                     = var.instance_count
+  for_each = local.rds_instances
+
   license_model             = "license-included"
   allocated_storage         = var.vrds_allocated_storage
   engine                    = var.vrds_engine
   engine_version            = var.vrds_engine_version
-  identifier                = "hpp-${count.index}"
+  identifier                = "hpp-${each.key}"
   instance_class            = var.vrds_instance_class
   storage_type              = var.vrds_storage_type
   final_snapshot_identifier = var.vrds_final_snapshot_identifier
@@ -60,11 +72,13 @@ resource "aws_db_instance" "default" {
 
   tags = {
     # ProductCode   = "${var.product_code_tag}"
-    Name          = "hpp-${count.index}"
+    # Name          = "hpp-${count.index}"
+    Name          = "hpp-${each.key}"
     Environment   = var.environment_tag
     InventoryCode = var.inventory_code_tag
-    DBIdentifier  = "hpp-${count.index}"
-    Creator       = var.resource_creator
+    # DBIdentifier  = "hpp-${count.index}"
+    DBIdentifier = "hpp-${each.key}"
+    Creator      = var.resource_creator
   }
 
   lifecycle {
