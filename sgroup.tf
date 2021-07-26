@@ -1,12 +1,12 @@
 resource "aws_security_group" "sql" {
-  name        = "hpp-secgroup-${var.resource_creator}sql"
+  name        = "pmrt-secgroup-sql"
   description = "rds instance (terraform-managed)"
   vpc_id      = var.vrds_vpc_id
   tags = {
     # ProductCode   = "${var.product_code_tag}"
     Environment   = var.environment_tag
     InventoryCode = var.inventory_code_tag
-    Creator       = var.resource_creator
+    # Creator       = var.resource_creator
   }
 }
 

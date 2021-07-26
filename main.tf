@@ -41,7 +41,7 @@ resource "aws_db_instance" "default" {
   allocated_storage         = var.vrds_allocated_storage
   engine                    = var.vrds_engine
   engine_version            = var.vrds_engine_version
-  identifier                = "hpp-${each.key}"
+  identifier                = "pmrt-${each.key}"
   instance_class            = var.vrds_instance_class
   storage_type              = var.vrds_storage_type
   final_snapshot_identifier = var.vrds_final_snapshot_identifier
@@ -73,12 +73,12 @@ resource "aws_db_instance" "default" {
   tags = {
     # ProductCode   = "${var.product_code_tag}"
     # Name          = "hpp-${count.index}"
-    Name          = "hpp-${each.key}"
+    Name          = "pmrt-${each.key}"
     Environment   = var.environment_tag
     InventoryCode = var.inventory_code_tag
     # DBIdentifier  = "hpp-${count.index}"
-    DBIdentifier = "hpp-${each.key}"
-    Creator      = var.resource_creator
+    DBIdentifier = "pmrt-${each.key}"
+    # Creator      = var.resource_creator
   }
 
   lifecycle {

@@ -4,7 +4,7 @@
 
 resource "aws_db_parameter_group" "default" {
   count       = var.vrds_custom_param_group ? 1 : 0
-  name        = "hpp-param-master"
+  name        = "pmrt-param-master"
   family      = var.db_family
   description = "rds instance parameter group"
 
@@ -18,13 +18,13 @@ resource "aws_db_parameter_group" "default" {
     # ProductCode   = "${var.product_code_tag}"
     Environment   = var.environment_tag
     InventoryCode = var.inventory_code_tag
-    Creator       = var.resource_creator
+    # Creator       = var.resource_creator
   }
 }
 
 resource "aws_db_parameter_group" "default_ro" {
   count       = var.vrds_custom_param_group && var.vrds_ro_count > 0 ? 1 : 0
-  name        = "hpp-param-ro"
+  name        = "pmrt-param-ro"
   family      = var.db_family
   description = "rds instance parameter group"
 
@@ -36,6 +36,6 @@ resource "aws_db_parameter_group" "default_ro" {
     # ProductCode   = var.product_code_tag
     Environment   = var.environment_tag
     InventoryCode = var.inventory_code_tag
-    Creator       = var.resource_creator
+    # Creator       = var.resource_creator
   }
 }

@@ -10,7 +10,7 @@ variable "inventory_code_tag" {}
 variable "environment_tag" {}
 # variable "account_tag" {}
 variable "product_name" {}
-variable "resource_creator" {}
+# variable "resource_creator" {}
 
 # RDS Instance Agruments
 variable "vrds_allocated_storage" {}
