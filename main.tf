@@ -86,33 +86,3 @@ resource "aws_db_instance" "default" {
   }
 }
 
-# Create read replica in same region
-# Since it is a read replica, master user, master user password, storage size and maintenace windows setting will be inherited from master.
-# Auto backup feature is available on master only, but it allows customer to do manual snapshot on read replica
-
-# resource "aws_db_instance" "default_readonly" {
-#   count                  = var.vrds_ro_count
-#   identifier             = "${var.vrds_identifier}ro${count.index + 1}"
-#   vpc_security_group_ids = ["${aws_security_group.sql.id}"]
-#   port                   = var.vrds_port_ro
-#   storage_type           = var.vrds_storage_type_ro
-#   iops                   = var.vrds_iops_ro
-#   instance_class         = var.vrds_instance_class_ro
-#   copy_tags_to_snapshot  = var.vrds_copy_tags_to_snapshot_ro
-#   # db_subnet_group_name       = aws_db_subnet_group.main[0].name
-#   apply_immediately          = var.vrds_apply_immediately_ro
-#   auto_minor_version_upgrade = var.vrds_auto_minor_version_upgrade_ro
-#   monitoring_interval        = var.vrds_enhanced_monitoring_interval
-#   monitoring_role_arn        = var.vrds_monitoring_role_arn
-#   replicate_source_db        = aws_db_instance.default.id
-
-#   tags = {
-#     # ProductCode   = var.product_code_tag
-#     Environment   = var.environment_tag
-#     InventoryCode = var.inventory_code_tag
-#     DBIdentifier  = var.vrds_identifier
-#     Creator       = var.resource_creator
-#   }
-
-# }
-
